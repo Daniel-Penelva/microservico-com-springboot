@@ -1,4 +1,4 @@
-package com.microservice.ordersservice.dtos;
+package com.microservice.ordersservice.model.dtos;
 
 import java.util.List;
 

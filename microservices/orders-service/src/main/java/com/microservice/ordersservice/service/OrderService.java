@@ -1,6 +1,6 @@
 package com.microservice.ordersservice.service;
 
-import com.microservice.ordersservice.dtos.*;
+import com.microservice.ordersservice.model.dtos.*;
 import com.microservice.ordersservice.model.entities.Order;
 import com.microservice.ordersservice.model.entities.OrderItems;
 import com.microservice.ordersservice.repositories.OrderRepository;

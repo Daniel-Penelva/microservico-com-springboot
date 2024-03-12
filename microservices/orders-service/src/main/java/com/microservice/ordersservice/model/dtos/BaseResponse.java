@@ -1,4 +1,4 @@
-package com.microservice.ordersservice.dtos;
+package com.microservice.ordersservice.model.dtos;
 
 public record BaseResponse(String[] errorMessages) {
     public boolean hasErrors() {
