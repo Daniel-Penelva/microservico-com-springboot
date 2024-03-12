@@ -18,7 +18,7 @@ public class OrderItems {
 
     private String sku;
     private Double price;
-    private Long quatity;
+    private Long quantity;
 
     // Vários itens pedidos possui um pedido
     @ManyToOne
