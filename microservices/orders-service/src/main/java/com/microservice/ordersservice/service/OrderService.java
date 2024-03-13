@@ -56,7 +56,7 @@ public class OrderService {
     }
 
     /* getAllOrders(): Método privado que retorna uma lista de todos os pedidos existentes no banco de dados, mapeando-os para objetos OrderResponse. */
-    List<OrderResponse> getAllOrders() {
+    public List<OrderResponse> getAllOrders() {
         List<Order> orders = this.orderRepository.findAll();
         return orders.stream().map(this::mapToOrderResponse).toList();
     }

@@ -16,12 +16,14 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
+    // http://localhost:8083/api/inventory/{sku}
     @GetMapping("/{sku}")
     @ResponseStatus(HttpStatus.OK)
     public boolean isInStock(@PathVariable("sku") String sku) {
         return inventoryService.isInStock(sku);
     }
 
+    // http://localhost:8083/api/inventory/in-stock
     @PostMapping("/in-stock")
     @ResponseStatus(HttpStatus.OK)
     public BaseResponse areInStock(@RequestBody List<OrderItemRequest> orderItems) {
