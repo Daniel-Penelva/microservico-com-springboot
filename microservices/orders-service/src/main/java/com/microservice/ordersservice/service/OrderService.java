@@ -24,7 +24,7 @@ public class OrderService {
         para um serviço de inventário usando o WebClient, e com base na resposta, salva o pedido no banco de dados através do orderRepository.*/
         BaseResponse result = this.webClientBuilder.build()
                 .post()
-                .uri("http://localhost:8083/api/inventory/in-stock")
+                .uri("http://localhost:8080/api/inventory/in-stock")
                 .bodyValue(orderRequest.getOrderItems())
                 .retrieve()
                 .bodyToMono(BaseResponse.class)
