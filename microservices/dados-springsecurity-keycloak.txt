@@ -1,0 +1,19 @@
+Acessar interface keycloak
+http://localhost:8181/
+
+<Role Admin>
+login: admin_user (ou admin_user@gmail.com)
+senha: 123
+
+<Role User>
+login: basic_user (ou basic_user@gmail.com)
+senha: 123
+
+Para testar o filtro vou acessar o endpoint:
+http://localhost:8080/api/product
+
+OBS. Limpar a sessão
+1. Vai na página principal de login do keycloak (http://localhost:8181/)
+2. Vai em inspecionar (botão direito do mouse) ou F12
+3. Aba de menu "Application" em Cookies
+4. Deleta todas as sessões que tiverem (botão direito do mouse vai em delete).
