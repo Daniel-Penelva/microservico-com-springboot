@@ -18,7 +18,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
 
-    public void placeOrder(OrderRequest orderRequest) {
+    public OrderResponse placeOrder(OrderRequest orderRequest) {
 
         /* Este método é responsável por realizar o processo de colocação de um pedido. Ele primeiro verifica o estoque fazendo uma requisição POST
         para um serviço de inventário usando o WebClient, e com base na resposta, salva o pedido no banco de dados através do orderRepository.*/
@@ -37,7 +37,8 @@ public class OrderService {
                     .map(orderItemRequest -> mapOrderItemRequestToOrderItem(orderItemRequest, order))
                     .toList());
 
-            this.orderRepository.save(order);
+            var savedOrder = this.orderRepository.save(order);
+            return mapToOrderResponse(savedOrder);
         } else {
             throw new IllegalArgumentException("Alguns dos produtos não estão em estoque");
         }
