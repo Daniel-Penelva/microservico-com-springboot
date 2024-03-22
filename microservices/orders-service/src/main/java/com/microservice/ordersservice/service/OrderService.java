@@ -1,10 +1,14 @@
 package com.microservice.ordersservice.service;
 
+import com.microservice.ordersservice.events.OrderEvent;
 import com.microservice.ordersservice.model.dtos.*;
 import com.microservice.ordersservice.model.entities.Order;
 import com.microservice.ordersservice.model.entities.OrderItems;
+import com.microservice.ordersservice.model.enums.OrderStatus;
 import com.microservice.ordersservice.repositories.OrderRepository;
+import com.microservice.ordersservice.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -17,6 +21,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     public OrderResponse placeOrder(OrderRequest orderRequest) {
 
@@ -38,6 +43,12 @@ public class OrderService {
                     .toList());
 
             var savedOrder = this.orderRepository.save(order);
+
+            //TODO: Send message to order topic
+            this.kafkaTemplate.send("orders-topic", JsonUtils.toJson(
+                    new OrderEvent(savedOrder.getOrderNumber(), savedOrder.getOrderItems().size(), OrderStatus.PLACED)
+            ));
+
             return mapToOrderResponse(savedOrder);
         } else {
             throw new IllegalArgumentException("Alguns dos produtos não estão em estoque");
